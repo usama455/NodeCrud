@@ -1,8 +1,11 @@
-// // const express = require("express");
 import express from "express";
+import mongo from "./configure/mongoose";
+
 const app = express();
 
+mongo.connect();
+
 app.use("/", require("./api/index"));
-app.use("/users", require("./api/users"));
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}... `));
