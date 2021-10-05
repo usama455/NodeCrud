@@ -6,4 +6,15 @@ const create = (user) => {
 	// return User.insert(User);
 };
 
-export default { create };
+
+const getAll = () =>{
+	return User.find()
+}
+
+const  findOne  = (email) =>{
+	return User.findOne({email:email})
+}
+
+
+
+export default { create, findOne, getAll };

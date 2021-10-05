@@ -4,5 +4,5 @@ import users from "./users";
 const router = new Router();
 
 router.use("/books", books);
-router.use("/users", users);
+router.use("/user", users);
 module.exports = router;
