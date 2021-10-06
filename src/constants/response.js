@@ -3,7 +3,8 @@ export const messages = {
 	created: "Record created successfully",
 	updated: "Record updated successfully",
 	deleted: "Record deleted successfully",
-	notFound: "Record not found"
+	notFound: "Record not found",
+	validPassword: "Pasword is valid."
 };
 
 export const errors = {

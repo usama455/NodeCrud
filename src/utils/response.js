@@ -20,6 +20,14 @@ export const notFound = (res, data = {}) => {
 	return res.status(resStatuses.notFound).json({ success: false, message: messages.notFound, data });
 };
 
+export const validPassword = (res) => {
+	return res.status(resStatuses.ok).json({ success: true, message: messages.validPassword });
+};
+
 export const wrongPassword = (res) => {
 	return res.status(resStatuses.badRequest).json({ success: false, message: errors.wrongPass });
+};
+
+export const error = (res, message, data = {}) => {
+	return res.status(resStatuses.internalError).json({ success: false, message, data });
 };
