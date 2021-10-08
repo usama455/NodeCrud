@@ -1,8 +1,7 @@
 import { created, success, error, updated, wrongPassword, validPassword } from "../../utils/response";
 import User from "./model";
 import { logger } from "./../../utils/";
-
-const passport = require("passport");
+import passport from "passport";
 
 const register = async (req, res) => {
 	try {
