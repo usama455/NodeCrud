@@ -1,9 +1,9 @@
 import Router from "express";
-import { register, getAll, validatePassword } from "./controller";
-// import { checkUserExists } from "./helper";
+import { register, getAll, login } from "./controller";
+import { checkUserExists } from "./helper";
 const router = new Router();
 
-router.post("/register", register);
+router.post("/register", checkUserExists, register);
 router.get("/getAll", getAll);
-router.post("/validatePassowrd", validatePassword);
+router.post("/login", login);
 export default router;

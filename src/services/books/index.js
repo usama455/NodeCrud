@@ -1,8 +1,8 @@
 import Router from "express";
-import { getAllBooks } from "./controller";
+import { addBook, getAll } from "./controller";
 
 const router = new Router();
 
-router.get("/all-books", getAllBooks);
-
+router.post("/add", addBook);
+router.get("/getAll", getAll);
 export default router;

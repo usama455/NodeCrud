@@ -1,7 +1,8 @@
 import { created, success, error, updated, wrongPassword, validPassword } from "../../utils/response";
-import User from "../../models/users";
+import User from "./model";
 import { logger } from "./../../utils/";
-import mongoose from "mongoose";
+
+const passport = require("passport");
 
 const register = async (req, res) => {
 	try {
@@ -15,14 +16,17 @@ const register = async (req, res) => {
 	}
 };
 
-const validatePassword = async (req, res) => {
+const login = async (req, res, next) => {
 	try {
-		const { email, password } = req.body;
-		const user = await User.findOne({ email: email });
-		const isValidated = await user.validatePassword(password);
-		if (isValidated) return validPassword(res, {});
-		else return wrongPassword(res, {});
-		return updated(res, {});
+		await passport.authenticate("local", (err, token, info) => {
+			if (err) {
+				return next(err);
+			}
+			if (!token) {
+				return error(res, info);
+			}
+			return success(res, { message: info, token: token });
+		})(req, res, next);
 	} catch (err) {
 		console.log(err);
 		logger.error(err.message);
@@ -41,4 +45,4 @@ const getAll = async (req, res) => {
 	}
 };
 
-export { register, getAll, validatePassword };
+export { register, getAll, login };

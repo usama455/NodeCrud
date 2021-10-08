@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
+import { jwt } from "jsonwebtoken";
 const SALT_WORK_FACTOR = 10;
+
+// require('./config/passport');
+
 const UserSchema = new Schema(
 	{
 		name: {
@@ -35,6 +39,22 @@ UserSchema.methods.validatePassword = async function (password) {
 	const isMatch = await bcrypt.compare(password, this.password);
 	return isMatch;
 };
+
+UserSchema.methods.generateJWT = function () {
+	const today = new Date();
+	const expirationDate = new Date(today);
+	expirationDate.setDate(today.getDate() + 60);
+
+	return jwt.sign(
+		{
+			email: this.email,
+			id: this._id,
+			exp: parseInt(expirationDate.getTime() / 1000, 10)
+		},
+		"secret"
+	);
+};
+
 const User = model("User", UserSchema);
 
 export default User;
