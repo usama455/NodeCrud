@@ -34,6 +34,7 @@ const login = async (req, res, next) => {
 };
 const getAll = async (req, res) => {
 	try {
+		console.log(req);
 		const userData = await User.find();
 		return success(res, {
 			data: userData

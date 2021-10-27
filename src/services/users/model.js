@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 import { jwt } from "jsonwebtoken";
 const SALT_WORK_FACTOR = 10;
-
+import { ROLES } from "../../utils";
 // require('./config/passport');
 
 const UserSchema = new Schema(
@@ -18,6 +18,11 @@ const UserSchema = new Schema(
 		},
 		password: {
 			type: String,
+			required: true
+		},
+		role: {
+			type: String,
+			enum: Object.keys(ROLES),
 			required: true
 		}
 	},

@@ -1,3 +1,3 @@
 import logger from "./logger";
-
-export { logger };
+import { ROLES } from "./roles";
+export { logger, ROLES };
